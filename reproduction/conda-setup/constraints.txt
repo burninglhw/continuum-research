@@ -1,0 +1,13 @@
+vllm==0.10.2
+torch==2.8.0
+torchaudio==2.8.0
+torchvision==0.23.0
+xformers==0.0.32.post1
+transformers==4.55.2
+tokenizers==0.21.4
+numpy==2.2.6
+setuptools==79.0.1
+lmcache==0.3.7
+litellm==1.75.5.post2
+openai>=1.99.1,<2
+huggingface-hub>=0.34,<1

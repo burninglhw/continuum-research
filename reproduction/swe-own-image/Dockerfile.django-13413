@@ -1,0 +1,19 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+LABEL continuum.image.owner="ext.luohaowen1" continuum.image.task="django__django-13413"
+LABEL continuum.image.base_commit="fed257ddff449e1bf1ce06d9a7fddb148290a6ac"
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN git init /testbed \
+    && git -C /testbed remote add origin https://github.com/django/django.git \
+    && git -C /testbed fetch --depth=1 origin fed257ddff449e1bf1ce06d9a7fddb148290a6ac \
+    && git -C /testbed checkout --detach fed257ddff449e1bf1ce06d9a7fddb148290a6ac \
+    && git -C /testbed remote remove origin \
+    && cd /testbed && python -m pip install --no-cache-dir -e .
+RUN python -m pip check \
+    && python -m pip freeze > /opt/continuum-build/pip-freeze.txt \
+    && /opt/miniconda3/bin/conda list -n testbed --explicit > /opt/continuum-build/conda-explicit.txt \
+    && dpkg-query -W > /opt/continuum-build/dpkg-versions.txt \
+    && test "$(git rev-parse HEAD)" = fed257ddff449e1bf1ce06d9a7fddb148290a6ac \
+    && test -z "$(git status --porcelain)"
+WORKDIR /testbed
+CMD ["/bin/bash"]

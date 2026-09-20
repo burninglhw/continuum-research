@@ -1,0 +1,11 @@
+requests==2.32.5
+PyYAML==6.0.2
+Jinja2==3.1.6
+numpy==1.26.4
+pyarrow==21.0.0
+transformers==4.55.2
+tokenizers==0.21.4
+litellm==1.75.5.post2
+pytest==8.4.2
+swebench==4.1.0
+chardet==5.2.0

@@ -1,0 +1,11 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+LABEL continuum.image.owner="ext.luohaowen1" continuum.image.managed="swe100"
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+COPY recipe.json configure_image.py matplotlib-compat.json /opt/continuum-build/
+RUN CONTINUUM_CONTAINER_BUILD=1 /opt/miniconda3/bin/python /opt/continuum-build/configure_image.py environment
+ENV PATH=/opt/miniconda3/envs/testbed/bin:/opt/miniconda3/bin:$PATH
+COPY activate-testbed.sh /etc/profile.d/continuum-testbed.sh
+COPY activate-testbed.sh /root/.bashrc
+WORKDIR /testbed
+CMD ["/bin/bash"]

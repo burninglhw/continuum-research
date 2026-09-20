@@ -1,0 +1,12 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+ARG TASK_ID
+ARG BASE_COMMIT
+LABEL continuum.image.owner="ext.luohaowen1" continuum.image.managed="swe100"
+LABEL continuum.image.task="${TASK_ID}" continuum.image.base_commit="${BASE_COMMIT}"
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+COPY recipe.json configure_image.py /opt/continuum-build/
+COPY source-cache/ /opt/continuum-build/source-cache/
+RUN CONTINUUM_CONTAINER_BUILD=1 /opt/miniconda3/bin/python /opt/continuum-build/configure_image.py task
+WORKDIR /testbed
+CMD ["/bin/bash"]

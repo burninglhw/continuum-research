@@ -1,0 +1,8 @@
+*
+!Dockerfile.base
+!Dockerfile.env-django
+!Dockerfile.django-13413
+!ubuntu-base-22.04.5-base-amd64.tar.gz
+!Miniforge3-26.7.2-0-Linux-x86_64.sh
+!django-requirements.txt
+!activate-testbed.sh

@@ -1,0 +1,63 @@
+# Conservative first upload for /export/home/ext.luohaowen1/continuum.
+# Copy this file to the repository root as .gitignore.
+# This is a source-code allowlist, NOT a complete experiment backup.
+# Review allowed source/docs for secrets and external-sharing permission.
+
+# Ignore top-level content unless explicitly included below.
+/*
+!/.gitignore
+!/.gitmodules
+!/README.md
+!/LICENSE
+!/NOTICE
+!/UPSTREAM.md
+!/vllm-continuum/
+!/reproduction/
+!/elastic-kv-study/
+
+# Data preparation scripts and selected reproduction modules.
+/reproduction/*
+!/reproduction/*.py
+!/reproduction/README.md
+!/reproduction/requirements-data.txt
+!/reproduction/conda-setup/
+!/reproduction/swe-traces/
+!/reproduction/swe-own-image/
+!/reproduction/catraces-cpu-20260919/
+
+# Only direct source/docs/dependency files in those modules.
+# All deeper runs, caches, images, backups, provenance, etc. stay excluded.
+/reproduction/*/*
+!/reproduction/*/*.py
+!/reproduction/*/*.sh
+!/reproduction/*/*.md
+!/reproduction/*/Dockerfile*
+!/reproduction/*/.dockerignore
+!/reproduction/*/requirements*.txt
+!/reproduction/*/constraints.txt
+/reproduction/swe-own-image/Miniforge*.sh
+
+# Selected study code; generated datasets/results remain excluded.
+/elastic-kv-study/*
+!/elastic-kv-study/pilot-20260917/
+!/elastic-kv-study/swe100-20260920/
+/elastic-kv-study/*/*
+!/elastic-kv-study/*/*.py
+!/elastic-kv-study/*/*.md
+!/elastic-kv-study/swe100-20260920/analysis/
+/elastic-kv-study/swe100-20260920/analysis/*
+!/elastic-kv-study/swe100-20260920/analysis/*.py
+!/elastic-kv-study/swe100-20260920/analysis/*.md
+
+# Defense in depth; these rules do not replace content review.
+.DS_Store
+._*
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
